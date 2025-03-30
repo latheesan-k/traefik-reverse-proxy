@@ -1,0 +1,9 @@
+1. NetworkManager configuration
+sudo mkdir -p /etc/NetworkManager/dnsmasq.d/
+echo "server=/dev/127.0.0.1" | sudo tee /etc/NetworkManager/dnsmasq.d/dev-tld.conf
+sudo systemctl restart NetworkManager
+
+2. Setup systemd-resolved
+sudo mkdir -p /etc/systemd/resolved.conf.d/
+echo -e "[Resolve]\nDNS=127.0.0.1\nDomains=~dev" | sudo tee /etc/systemd/resolved.conf.d/dev-tld.conf
+sudo systemctl restart systemd-resolved
